@@ -40,14 +40,19 @@ class getPokemonInformationCommand extends Command
             $response = $client->get('https://pokeapi.co/api/v2/pokemon/' . $i);
             $pokemonData = json_decode($response->getBody()->getContents());
 
-            $pokemonExists = Pokemon::where('pokedex_id', $i)
+            $url = $pokemonData->types[0]->type->url;
+            $explodeUrl = explode('/', $url);
+            $typeId = $explodeUrl[sizeof($explodeUrl) - 2];
+
+            $pokemonExists = Pokemon::where('api_id', $pokemonData->id)
                 ->where('name', $pokemonData->name)
                 ->first();
-        
+
             if (!$pokemonExists) {
                 Pokemon::create([
-                    'pokedex_id' => $i,
-                    'name' => $pokemonData->name
+                    'api_id' => $pokemonData->id,
+                    'name' => $pokemonData->name,
+                    'type_id' => $typeId
                 ]);
             }
 

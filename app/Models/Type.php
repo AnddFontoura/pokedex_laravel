@@ -6,16 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Pokemon extends Model
+class Type extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = "pokemons";
-
     protected $fillable = [
-        'type_id',
         'api_id',
         'name',
+        'button',
     ];
 }
