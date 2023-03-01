@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('pokemons', function (Blueprint $table) {
             $table->id();
-            $table->integer('pokedex_id')->nullable(false);
+            $table->integer('api_id')->nullable(false);
             $table->string('name', 500)->nullable(false);
+            $table->string('image', 500)->nullable(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,4 +32,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('pokemons');
     }
+    
 };
