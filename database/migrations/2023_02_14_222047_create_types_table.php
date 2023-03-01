@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('api_id')->nullable(false);
             $table->string('name', 254)->nullable(false);
             $table->string('button', 1000)->nullable(true);
+            $table->string('background_image', 1000)->nullable(true);
             $table->timestamps();
             $table->softDeletes();
         });

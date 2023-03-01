@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('pokemons', function (Blueprint $table) {
-            $table->renameColumn('pokedex_id', 'api_id')->change();
+        Schema::create('pokemons_has_types', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('pokemon_id');
             $table->unsignedBigInteger('type_id');
+            $table->timestamps();
             $table->softDeletes();
-            
+
             $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('pokemon_id')->references('id')->on('pokemons');
         });
     }
 
@@ -29,10 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('pokemons', function (Blueprint $table) {
-            $table->dropForeign('pokemons_type_id_foreign');
-            $table->dropColumn(['type_id']);
-            $table->rename('api_id', 'pokedex_id');
-        });
+        Schema::dropIfExists('pokemons_has_types');
     }
 };
