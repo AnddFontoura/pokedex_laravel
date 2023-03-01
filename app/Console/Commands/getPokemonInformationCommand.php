@@ -31,7 +31,6 @@ class getPokemonInformationCommand extends Command
      */
     public function handle()
     {
-        $typeId2 = null;
 
         $this->info('Iniciando Comando dos Pokemons');
 
@@ -39,6 +38,8 @@ class getPokemonInformationCommand extends Command
         $progressBar->start();
 
         for ($i = 1; $i <= $this->valorPreDefinido; $i++) {
+            $typeId2 = null;
+            
             $client = new Client();
             $response = $client->get('https://pokeapi.co/api/v2/pokemon/' . $i);
             $pokemonData = json_decode($response->getBody()->getContents());

@@ -18,4 +18,5 @@ class Pokemon extends Model
         'name',
         'image'
     ];
+
 }
