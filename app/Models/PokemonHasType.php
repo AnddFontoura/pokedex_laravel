@@ -17,9 +17,4 @@ class PokemonHasType extends Model
         'pokemon_id',
         'type_id'
     ];
-
-    public function typeData()
-    {
-        return $this->hasOne(Type::class, 'id', 'type_id');
-    }
 }

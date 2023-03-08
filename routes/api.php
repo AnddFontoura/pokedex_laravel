@@ -19,4 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('pokemon/search', [PokemonApiController::class, 'search']);
+Route::get('pokemon', [PokemonApiController::class, 'getPokemon']);
+Route::get('pokemon/hastype', [PokemonApiController::class, 'getPokemonsByType']);
+
+Route::get('type/search', [PokemonApiController::class, 'getTypes']);
