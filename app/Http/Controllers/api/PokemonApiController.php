@@ -35,9 +35,24 @@ class PokemonApiController extends Controller
             $pokemons = $pokemons->where('name', 'like', '%' . $parameters['partial_name'] . '%');
         }
 
+        if (isset($parameters['id'])) {
+            $pokemons = $pokemons->where('api_id', $parameters['id']);
+        }
+
         $pokemons = $pokemons->get();
 
         return response()->json($pokemons, Response::HTTP_OK);
+    }
+
+    public function getTypesFromPokemonId(Request $request) 
+    {
+        $parameters = $request->all();
+
+        $types = PokemonHasType::join('types', 'types.id', '=', 'pokemons_has_types.type_id')
+            ->where('pokemon_id', $request['id'])
+            ->get();
+
+        return response()->json($types, Response::HTTP_OK);
     }
 
     public function getTypes(Request $request)
